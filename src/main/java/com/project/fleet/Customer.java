@@ -7,9 +7,8 @@ public class Customer {
 		// TODO Auto-generated constructor stub
 	}
 
-		
+		private String customerName;
 		   private int customerId;
-		   private String customerName;
 		   private String address_line_1; 
 		   private String city; 
 		   private String state ;
@@ -19,7 +18,6 @@ public class Customer {
 		   private double longitude;
 		   private String business_phone;
 		   private String personal_phone;
-		   
 		   Customer(String customerName, int customerId){
 		      this.setCustomerName(customerName);
 		      this.setCustomerId(customerId);

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+H1 {
+	text-align: center;
+}
+
+h2 {
+	text-align: center;
+}
+
+form {
+	text-align: center;
+}
+</style>
+<meta charset="ISO-8859-1">
+
+<title>Edit Customer</title>
+</head>
+<body>
+		<h2 style="color: green">Edit Customer </h2>
+
+		<form action="../editsave"  method="post">
+			<table>
+			<input type="hidden" name="customerId" th:value="${customer.customerId}">
+			<tr>
+					<td>Customer Name</td>
+					<td><input type="text" name="customerName" th:value="${customer.customerName}"></td>
+				</tr>
+				<tr>
+					<td>Address</td>
+					<td><input type="text" name="address_line_1" th:value="${customer.address_line_1}"></td>
+				</tr>
+
+				<tr>
+					<td>City</td>
+					<td><input type="text" name="city" th:value="${customer.city}"></td>
+				</tr>
+				
+				<td>Postal Code</td>
+					<td><input type="text" name="postal_code" th:value="${customer.postal_code}"></td>
+				</tr>
+
+				<tr>
+					<td>State</td>
+					<td><input type="text" name="state" th:value="${customer.state}"></td>
+				</tr>
+
+				<tr>
+					<td>Country</td>
+					<td><input type="text" name="country" th:value="${customer.country}"></td>
+				</tr>
+
+				<tr>
+					
+
+				<tr>
+					<td>Latitude</td>
+					<td><input type="text" name="latitude" th:value="${customer.latitude}"></td>
+				</tr>
+
+				<tr>
+					<td>Longitude</td>
+					<td><input type="text" name="longitude" th:value="${customer.longitude}"></td>
+				</tr>
+
+				<tr>
+					<td>Business Phone</td>
+					<td><input type="text" name="business_phone" th:value="${customer.business_phone}"></td>
+				</tr>
+
+				<tr>
+					<td>Personal Phone</td>
+					<td><input type="text" name="personal_phone" th:value="${customer.personal_phone}"></td>
+				</tr>
+				<tr>
+					<td colspan='2'><button type="submit">Save</button></td>
+				</tr>
+
+
+			</table>
+			</form>
+</body>
+</html>
+
+
+
+
+

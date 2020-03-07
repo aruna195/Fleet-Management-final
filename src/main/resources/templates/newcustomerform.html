@@ -16,83 +16,80 @@ form {
 </style>
 <meta charset="ISO-8859-1">
 
-<title>New or Edit Customer</title>
+<title>New Customer</title>
 </head>
 
 <body>
 	<div align="center">
-		<h2 style="color: green">New Customer</h2>
+		<h2 style="color: green">New Customer List</h2>
 
-		<form:form action="save" method="post" modelAttribute="customers">
+		<form action="save" method="post">
 			<table>
-			<tr>         
-     <td>Customer IDs</td>
-     <td> <input type="text" th:text="${customer.customerName}"></td> 
-     </tr>
-     
-     <tr>   
-     <td>Customer Name</td>
-     <td> <input type="text" th:text="${customer.customerName}"></td>
-     </tr>
-     
-     <tr>
-     <td>Address </td>
-     <td> <input type="text" th:text="${customer.address_line_1}"></td>
-     </tr>
-     
-     <tr>
-     <td>City </td>
-     <td> <input type="text" th:text="${customer.city}"></td>
-     </tr>
-     
-     <tr> 
-     <td>State </td>
-     <td> <input type="text" th:text="${customer.state}"></td>
-     </tr>
-     
-     <tr>
-     <td>Country </td>
-     <td> <input type="text" th:text="${customer.country}"></td>
-     </tr>
-     
-     <tr>
-     <td>Postal Code </td>  
-     <td> <input type="text" th:text="${customer.postal_code}"></td>
-     </tr>
-     
-     <tr>
-     <td>Latitude </td> 
-     <td> <input type="text" th:text="${customer.latitude}"></td> 
-     </tr>
-     
-     <tr>
-     <td>Longitude </td>
-     <td> <input type="text" th:text="${customer.longitude}"></td>
-     </tr>
-     
-     <tr>
-     <td>Business Phone </td>
-     <td> <input type="text" th:text="${customer.business_phone}"></td>
-     </tr>
-     
-     <tr>
-     <td>Personal Phone </td>
-     <td> <input type="text" th:text= "${customer.personal_phone}"></td>  
-    </tr>
-          <tr>
-          <td colspan ='2'><button type="submit">Save</button></td>
-          </tr>
-         
-          </table>
-         </form>       
-                
-      
-   
+
+				<tr>
+					<td>Customer Id</td>
+					<td><input type="text" name="customerId"></td>
+				</tr>
+				<tr>
+					<td>Customer Name</td>
+					<td><input type="text" name="customerName"></td>
+				</tr>
+
+				<tr>
+					<td>Address</td>
+					<td><input type="text" name="address_line_1"></td>
+				</tr>
+
+				<tr>
+					<td>City</td>
+					<td><input type="text" name="city"></td>
+				</tr>
+				
+				<tr>
+					<td>Postal Code</td>
+					<td><input type="text" name="postal_code"></td>
+				</tr>
+
+				<tr>
+					<td>State</td>
+					<td><input type="text" name="state"></td>
+				</tr>
+
+				<tr>
+					<td>Country</td>
+					<td><input type="text" name="country"></td>
+				</tr>				
+
+				<tr>
+					<td>Latitude</td>
+					<td><input type="text" name="latitude"></td>
+				</tr>
+
+				<tr>
+					<td>Longitude</td>
+					<td><input type="text" name="longitude"></td>
+				</tr>
+
+				<tr>
+					<td>Business Phone</td>
+					<td><input type="text" name="business_phone"></td>
+				</tr>
+
+				<tr>
+					<td>Personal Phone</td>
+					<td><input type="text" name="personal_phone"></td>
+				</tr>
+				<tr>
+					<td colspan='2'><button type="submit">Save</button></td>
+				</tr>
+
+			</table>
+			</form>
 </body>
 </html>
-			
-				
-				</form>
-				</div>
+
+
+</form>
+</div>
 </body>
 </html>

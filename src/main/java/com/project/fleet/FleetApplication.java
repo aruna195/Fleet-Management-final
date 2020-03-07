@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 @Controller
 @SpringBootApplication
-@ComponentScan("com.*")
+@ComponentScan (basePackages =("com.*"))
 
 	
 	public class FleetApplication  extends SpringBootServletInitializer {

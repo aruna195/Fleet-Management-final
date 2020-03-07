@@ -4,13 +4,16 @@ import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 import CustomerDao.CustomerDao;
 import CustomerDao.CustomerDaoImpl;
+import CustomerFleetDao.CustomerFleetDao;
+import CustomerFleetDao.CustomerFleetDaoImpl;
+import FleetDao.FleetDao;
+import FleetDao.FleetDaoImpl;
 
 @Configuration
 @PropertySource("classpath:application.properties")
@@ -51,6 +54,17 @@ public class MyAppConfig {
 		return new CustomerDaoImpl();
 		
 	}
-	
+	@Bean
+	public CustomerFleetDao getCustomerFleetDao() {
+		
+		return new CustomerFleetDaoImpl();
+		
+	}	
+	@Bean
+	public FleetDao getFleetDao() {
+		
+		return new FleetDaoImpl();
+		
+	}
 	}
 

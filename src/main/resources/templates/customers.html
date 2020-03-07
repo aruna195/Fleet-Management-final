@@ -4,17 +4,18 @@
 <title>Fleet Management- Spring Boot Web Application</title>
 </head>
 <body>
-<H1 align="center" style="color:green">Customers List</H1>
-<h3 style="color:green">Customer </h3>
- <form method="get" action="search">
-        <input type="text" name="keyword" /> &nbsp;
+
+
+    <h3><a href="/">Home</a>&nbsp;&nbsp;&nbsp;<a href="/create">New Customer</a>&nbsp;&nbsp;&nbsp;<a href="/fleetlist"> Fleet List</a></h3>
+    <h4 style="color:blue"> Search Fleet List by Customer Id  </h4>
+ <form method="post" action="search">
+        <input type="text" name="searchId" /> &nbsp;
         <input type="submit" value="Search" />
-    </form>
-  
-  <h3><a href="/create">New Customer</a></h3>
- 
-   <br/>
-   <table border="1" cellpadding="10">
+ </form>
+  <br/> 
+  <H1 align="center" style="color:green">Customers List</H1>
+      
+    <table border="1" cellpadding="10">
    <tr>    
         
      <th>Customer IDs</th> 
@@ -26,26 +27,27 @@
      <th>Latitude </th>
      <th>Longitude </th>
      <th>Business Phone </th>
-     <th>Personal Phone </th>   
+     <th>Personal Phone </th>
+     <th>Actions</th>   
    </tr>
    
    <tr th:each="customer:${CustomerList}">
    
    <td th:text="${customer.customerId}">CustomerId</td> 
          <td th:text="${customer.customerName}">CustomerName</td>
-         <td th:text="${customer.address_line_1}"></td> 
-         <td th:text="${customer.city}"></td>
-         <td th:text="${customer.state}"></td>
-         <td th:text="${customer.country}"></td>
-         <td th:text="${customer.postal_code}"></td>
-         <td th:text="${customer.latitude}"></td> 
-         <td th:text="${customer.longitude}"></td>
-         <td th:text="${customer.business_phone}"></td> 
-         <td th:text="${customer.personal_phone}"></td> 
+         <td th:text="${customer.address_line_1}">Address</td> 
+         <td th:text="${customer.city}">City</td>
+         <td th:text="${customer.state}">State</td>
+         <td th:text="${customer.country}">Country</td>
+         <td th:text="${customer.postal_code}">Postal Code</td>
+         <td th:text="${customer.latitude}">Latitude</td> 
+         <td th:text="${customer.longitude}">Longitude</td>
+         <td th:text="${customer.business_phone}">Business Phone</td> 
+         <td th:text="${customer.personal_phone}">Personal Phone</td> 
           <td> 
-          <a th:href="${customerId}">Edit</a> 
+          <a th:href="${'/edit/' + customer.customerId}">Edit</a> 
              &nbsp;&nbsp;&nbsp;
-          <a th:href="${customerId}">Delete</a>
+          <a th:href="${'/delete/'+ customer.customerId}">Delete</a>
           </td> 
                              
      
