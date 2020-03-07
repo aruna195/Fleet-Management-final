@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Fleet Management- Spring Boot Web Application</title>
+</head>
+<body>
+<h1 align="center">Fleet List</h1>
+   <br/>
+   <table border="1" cellpadding="10">
+   <tr>
+  <title>FleetList</title>
+</head>
+
+<body>
+
+ <H1 style="color:green">Fleet List</H1>
+   
+   <table border="1" cellpadding="10">
+     <tr>
+     <th>Fleet IDs</th> 
+     <th>Fleet Name</th>
+     <th>Fleet Model </th>
+     <th>Fleet Make </th>
+     <th>Latitude </th>
+     <th>Longitude </th>
+     <th>Category </th>
+     <th>Serial Number </th>   
+     
+   </tr>
+   <tr th:each="fleet:${FleetList}" >
+   
+     
+         <td th:text="${fleet.fleet_id}"></td> 
+         <td th:text="${fleet.fleet_name}"></td> 
+         <td th:text="${fleet.fleet_model}"></td> 
+         <td th:text="${fleet.fleet_make}"></td>         
+         <td th:text="${fleet.latitude}"></td> 
+         <td th:text="${fleet.longitude}"></td>
+         <td th:text="${fleet.category}"></td> 
+         <td th:text="${fleet.serial_number}"></td>      
+            
+      
+       
+   </table>
+   
+
+</body>
+</html>
+
+
+
+  

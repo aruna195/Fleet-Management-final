@@ -1,0 +1,55 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Fleet Management- Spring Boot Web Application</title>
+</head>
+<body>
+<H1 align="center" style="color:green">Customers List</H1>
+<h3 style="color:green">Customer </h3>
+ <form method="get" action="search">
+        <input type="text" name="keyword" /> &nbsp;
+        <input type="submit" value="Search" />
+    </form>
+  
+  <h3><a href="/create">New Customer</a></h3>
+ 
+   <br/>
+   <table border="1" cellpadding="10">
+   <tr>    
+        
+     <th>Customer IDs</th> 
+     <th>Customer Name</th>
+     <th>Address </th>
+     <th>City </th>     <th>State </th>
+     <th>Country </th>
+     <th>Postal Code </th>
+     <th>Latitude </th>
+     <th>Longitude </th>
+     <th>Business Phone </th>
+     <th>Personal Phone </th>   
+   </tr>
+   
+   <tr th:each="customer:${CustomerList}">
+   
+   <td th:text="${customer.customerId}">CustomerId</td> 
+         <td th:text="${customer.customerName}">CustomerName</td>
+         <td th:text="${customer.address_line_1}"></td> 
+         <td th:text="${customer.city}"></td>
+         <td th:text="${customer.state}"></td>
+         <td th:text="${customer.country}"></td>
+         <td th:text="${customer.postal_code}"></td>
+         <td th:text="${customer.latitude}"></td> 
+         <td th:text="${customer.longitude}"></td>
+         <td th:text="${customer.business_phone}"></td> 
+         <td th:text="${customer.personal_phone}"></td> 
+          <td> 
+          <a th:href="${customerId}">Edit</a> 
+             &nbsp;&nbsp;&nbsp;
+          <a th:href="${customerId}">Delete</a>
+          </td> 
+                             
+     
+        </table>
+   
+</body>
+</html>
