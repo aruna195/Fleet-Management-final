@@ -7,12 +7,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class DataBaseFactory {
 	
+	//FactoryPattern is used here
+	
 
-	public static DataSource getDataSource(String dbType){
+	public static MyDataSource getDataSource(String dbType){
 		
-
+	
 		if("mysql".equals(dbType)){
-			return new MySQLDataSource().getDatasource();
+			return new MySQLDataSource();
 		}
 		
 		return null;

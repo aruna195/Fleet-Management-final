@@ -1,124 +1,142 @@
 package com.project.controllers;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import com.project.fleet.Customer;
-
+import com.project.fleet.FleetInfo;
 import CustomerDao.CustomerDao;
 import CustomerDao.CustomerDaoImpl;
+import CustomerFleetDao.CustomerFleetDao;
+
 @Controller
+
 public class HomeController {
-	// @GetMapping(value = "/")
-
-	// public String showHomePage(Model model) throws SQLException {
-
-	// System.out.println("In HomePage");
-	/*
-	 * List<Customer> allCustomers = new CustomerDaoImpl().getAllCustomers();
-	 * System.out.println(allCustomers);
-	 * 
-	 * model.addAttribute("CustomerList", allCustomers);
-	 * 
-	 * return "customers";
-	 * 
-	 * //return "home";
-	 */
-
-	// return "Create";
-
-	/*
-	 * List<FleetInfo> allFleetInfo = new FleetDaoImpl().getAllFleet();
-	 * System.out.println(allFleetInfo);
-	 * 
-	 * model.addAttribute("FleetList", allFleetInfo); return "fleetlist";
-	 */
-
-	// return "home";
 	@Autowired
 	private CustomerDao customerDao;
+
+	@Autowired
+	private CustomerFleetDao customerFleetDao;
 
 	@RequestMapping(value = "/")
 	public String showHomePage(Model model) throws SQLException {
 
 		System.out.println("In HomePage");
+		return "home";
 
-		/*List<Customer> allCustomers = new CustomerDaoImpl().getAllCustomers();
-		System.out.println(allCustomers);
+	}
 
-		model.addAttribute("CustomerList", allCustomers);
-		//((ModelAndView) model).setViewName("customers");
-		return "customers"; */
-		
+	@RequestMapping(value = "/customers", method = RequestMethod.GET)
+	public String getCustomerList(Model model) throws SQLException {
+
 		List<Customer> allCustomers = new CustomerDaoImpl().getAllCustomers();
 		System.out.println(allCustomers);
-			
+
 		model.addAttribute("CustomerList", allCustomers);
-		
+
 		return "customers";
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-
-	public String newCustomerPage(Model model) throws SQLException{
+	public String newCustomerPage(Model model) throws SQLException {
 		Customer newCustomer = new Customer();
+
 		model.addAttribute("customer", newCustomer);
-		//((ModelAndView) model).setViewName("NewCustomerForm");
+
 		return "newcustomerform";
 
 	}
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	
-	public String  save(@ModelAttribute Customer customer) {
-		customerDao.updateCustomer(customer);
-		
+
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public String newCustomerPage(@RequestParam String searchId, Model model) throws SQLException {
+//		Customer customer = customerDao.getCustomer(Integer.parseInt(searchId));
+//		List customers = new ArrayList();
+//		customers.add(customer);
+//		
+//		model.addAttribute("CustomerList", customers);
+		System.out
+				.println("*********** Search by Customer ID to get the List of Fleets owned by that Customer******** ");
+		List<FleetInfo> fleets = customerFleetDao.getFleets(Integer.parseInt(searchId));
+		model.addAttribute("FleetList", fleets);
+		return "fleetlist";
+
+	}
+
+	@PostMapping(value = "/save")
+	public String save(@RequestParam("customerId") String id, @RequestParam("customerName") String name,
+			@RequestParam("address_line_1") String address_line_1, @RequestParam("city") String city,
+			@RequestParam("postal_code") String postal_code, @RequestParam("state") String state,
+			@RequestParam("country") String country, @RequestParam("latitude") String latitude,
+			@RequestParam("longitude") String longitude, @RequestParam("business_phone") String business_phone,
+			@RequestParam("personal_phone") String personal_phone, ModelMap modelMap) {
+		Customer customer = new Customer();
+		customer.setCustomerId(Integer.parseInt(id));
+		customer.setCustomerName(name);
+		customer.setAddress_line_1(address_line_1);
+		customer.setCity(city);
+		customer.setPostal_code(postal_code);
+		customer.setState(state);
+		customer.setCountry(country);
+		customer.setLatitude(Double.parseDouble(latitude));
+		customer.setLongitude(Double.parseDouble(longitude));
+		customer.setBusiness_phone(business_phone);
+		customer.setPersonal_phone(personal_phone);
+
+		customerDao.createCustomer(customer);
+
 		return "redirect:/customers";
-	
-		
-	
-	} 
-	
 
-	@RequestMapping(value = "/edit/{id}")
-	public String editCustomer(@PathVariable int customerId, Model model) {
+	}
 
-		
+	@RequestMapping(value = "/edit/{customerId}")
+	public String editCustomer(@PathVariable int customerId, ModelMap modelMap) {
 		Customer customer = customerDao.getCustomer(customerId);
-		
-		model.addAttribute("customer", customer);
-		return "newcustomerform";
+		System.out.println("***************************"+customer.getCustomerName());
+		modelMap.addAttribute("customer", customer);
+		return "editcustomerform";
+
 	}
-@RequestMapping(value = "/editsave", method = RequestMethod.POST)
-	
-	public String  editsave(@ModelAttribute Customer customer) {
-		customerDao.updateCustomer(customer);
+
+	@PostMapping(value = "/editsave")
+	public String editsave(@RequestParam("customerId") String id,@RequestParam("customerName") String name,
+			@RequestParam("address_line_1") String address_line_1, @RequestParam("city") String city,
+			@RequestParam("postal_code") String postal_code, @RequestParam("state") String state,
+			@RequestParam("country") String country, @RequestParam("latitude") String latitude,
+			@RequestParam("longitude") String longitude, @RequestParam("business_phone") String business_phone,
+			@RequestParam("personal_phone") String personal_phone) {
 		
+		Customer editcustomer = new Customer();
+		editcustomer.setCustomerId(Integer.parseInt(id));
+		editcustomer.setCustomerName(name);
+		editcustomer.setAddress_line_1(address_line_1);
+		editcustomer.setCity(city);
+		editcustomer.setPostal_code(postal_code);
+		editcustomer.setState(state);
+		editcustomer.setCountry(country);
+		editcustomer.setLatitude(Double.parseDouble(latitude));
+		editcustomer.setLongitude(Double.parseDouble(longitude));
+		editcustomer.setBusiness_phone(business_phone);
+		editcustomer.setPersonal_phone(personal_phone);
+		customerDao.updateCustomer(editcustomer);
 		return "redirect:/customers";
-}
-	
+
+	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	public String deleteCustomer(@PathVariable int customerId) {
+	public String deleteCustomer(@PathVariable int id) {
 
-		
-		customerDao.deleteCustomer(customerId);
+		System.out.println("In DELETE............................");
+		customerDao.deleteCustomer(id);
 
 		return "redirect:/customers";
-	}
 
+	}
 }

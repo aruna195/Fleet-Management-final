@@ -1,5 +1,11 @@
 package com.project.db.datasource;
 
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.SQLFeatureNotSupportedException;
+import java.util.logging.Logger;
+
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp2.BasicDataSource;
@@ -8,29 +14,23 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MySQLDataSource {
-	
+public class MySQLDataSource implements MyDataSource{
 	@Autowired
 	private Environment env;
-
+	
 	public MySQLDataSource() {
 		// TODO Auto-generated constructor stub
 	}
-	public DataSource getDatasource()
+	public  DataSource getDatasource()
 	{
 		BasicDataSource ds = new BasicDataSource();
+			ds.setDriverClassName("com.mysql.jdbc.Driver");
+	        ds.setUrl("jdbc:mysql://localhost:3306/mydb");
+	        ds.setUsername("root");
+	        ds.setPassword("De@l12o603N!ll");
 		
-		//System.out.println("############################"+MyAppConfig.get;
-		
-		
-				
-		//System.out.println("############################"+ env.getProperty("MYSQL_DB_DRIVER_CLASS"));
-		ds.setDriverClassName("com.mysql.jdbc.Driver");
-        ds.setUrl("jdbc:mysql://localhost:3306/mydb");
-        ds.setUsername("root");
-        ds.setPassword("De@l12o603N!ll");
 
         return ds;
-	}
+	}	
 
 }
