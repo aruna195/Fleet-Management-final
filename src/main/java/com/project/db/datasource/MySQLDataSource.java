@@ -24,13 +24,12 @@ public class MySQLDataSource implements MyDataSource{
 	public  DataSource getDatasource()
 	{
 		BasicDataSource ds = new BasicDataSource();
-			ds.setDriverClassName("com.mysql.jdbc.Driver");
-	        ds.setUrl("jdbc:mysql://localhost:3306/mydb");
-	        ds.setUsername("root");
-	        ds.setPassword("De@l12o603N!ll");
-		
-
-        return ds;
+			ds.setDriverClassName("org.postgresql.Driver");
+	        ds.setUrl("jdbc:postgresql://mydb.cwhbyojxrlzf.us-east-2.rds.amazonaws.com:5432/mydb");
+	        ds.setUsername("postgres");
+	        ds.setPassword("Anna2020");         
+	        
+	           return ds;
 	}	
 
 }

@@ -42,7 +42,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	public List<Customer> getAllCustomers() {
 		// TODO Auto-generated method stub
-		String sql = "Select * from mydb.customers";
+		String sql = "Select * from public.customer";
 
 		return jdbcTemplate.query(sql, new BeanPropertyRowMapper(Customer.class));
 
@@ -51,7 +51,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	public Customer getCustomer(int customerId) {
 		// TODO Auto-generated method stub
 
-		String sql = "Select * from mydb.customers Where customer_id=" + customerId;
+		String sql = "Select * from public.customer Where customer_id=" + customerId;
 		return jdbcTemplate.query(sql, new ResultSetExtractor<Customer>() {
 
 			@Override
@@ -82,7 +82,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	@Override
 	public void createCustomer(Customer customer) {
 
-		String sql = "insert into mydb.customers(customer_id, customer_name, address_line_1, city, state, country, postal_code, latitude, longitude, business_phone, personal_phone) Values(?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into public.customer(customer_id, customer_name, address_line_1, city, state, country, postal_code, latitude, longitude, business_phone, personal_phone) Values(?,?,?,?,?,?,?,?,?,?,?)";
 
 		jdbcTemplate.update(sql, customer.getCustomerId(), customer.getCustomerName(), customer.getAddress_line_1(),
 				customer.getCity(), customer.getPostal_code(),customer.getState(), customer.getCountry(), 
@@ -96,7 +96,7 @@ public class CustomerDaoImpl implements CustomerDao {
 		// TODO Auto-generated method stub
 		 if (customer.getCustomerId() > 0) {
 
-		String sql = "UPDATE  mydb.customers Set customerId=?, customerName=?,address_line_1()=?, city=?,postal_code=?,state=?,country=?,latitude=?,longitude=?,business_phone=?,personal_phone=? WHERE customer_id=?,";
+		String sql = "UPDATE  public.customer Set customerId=?, customerName=?,address_line_1()=?, city=?,postal_code=?,state=?,country=?,latitude=?,longitude=?,business_phone=?,personal_phone=? WHERE customer_id=?,";
 		jdbcTemplate.update(sql, customer.getCustomerId(), customer.getCustomerName(), customer.getAddress_line_1(),
 				customer.getCity(), customer.getPostal_code(), customer.getState(),  customer.getCountry(),
 				customer.getLatitude(), customer.getLongitude(), customer.getBusiness_phone(),
@@ -124,7 +124,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	@Override
 	public void updateCustomer(Customer customer) {
-		String sql = "UPDATE  mydb.customers Set customer_name='" + customer.getCustomerName() + "',address_line_1='"
+		String sql = "UPDATE  public.customer Set customer_name='" + customer.getCustomerName() + "',address_line_1='"
 				+ customer.getAddress_line_1() + "',city='" + customer.getCity() + "',postal_code='"
 				+ customer.getPostal_code() + "',state='" + customer.getState() + "',country='" + customer.getCountry()
 				+ "',latitude='" + customer.getLatitude() + "',longitude='" + customer.getLongitude()
@@ -138,7 +138,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	@Override
 	public void deleteCustomer(int customerId) {
 		// TODO Auto-generated method stub
-		String sql = "DELETE From mydb.customers where customer_id=?";
+		String sql = "DELETE From public.customers where customer_id=?";
 		jdbcTemplate.update(sql, customerId);
 	}
 

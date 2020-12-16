@@ -39,12 +39,12 @@ import com.project.fleet.FleetInfo;
 
 		@Override
 		public List<FleetInfo> getAllFleet() {
-						String sql = "Select * from mydb.fleet_info"; 						
+						String sql = "Select * from public.fleet_info"; 						
 						return jdbcTemplate.query(sql, new BeanPropertyRowMapper(FleetInfo.class));
 		}@Override
 		public FleetInfo getFleetInfo(int fleet_id) {
 			// TODO Auto-generated method stub
-			String sql = "Select * from mydb.fleet_info Where fleet_id=" + fleet_id;
+			String sql = "Select * from public.fleet_info Where fleet_id=" + fleet_id;
 			return jdbcTemplate.query(sql, new ResultSetExtractor<FleetInfo>() {
 
 				@Override
@@ -72,7 +72,7 @@ import com.project.fleet.FleetInfo;
 		public void createFleetInfo(FleetInfo fleet) {
 			// TODO Auto-generated method stub
 			
-			String sql = "insert into mydb.fleet_info(fleet_id, fleet_name, fleet_model, fleet_make, latitude, longitude, category, serial_number) Values(?,?,?,?,?,?,?,?)";
+			String sql = "insert into public.fleet_info(fleet_id, fleet_name, fleet_model, fleet_make, latitude, longitude, category, serial_number) Values(?,?,?,?,?,?,?,?)";
 
 			jdbcTemplate.update(sql, fleet.getFleet_id(),fleet.getFleet_name(),fleet.getFleet_model (),fleet.getFleet_make (),
 						fleet.getLatitude(), fleet.getLongitude(), fleet.getCategory(),

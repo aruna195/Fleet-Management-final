@@ -45,7 +45,7 @@ public class CustomerFleetDaoImpl implements CustomerFleetDao {
 	@Override
 	public List<CustomerFleet> getAllCustomerFleet() {
 		
-		String sql = "Select * from mydb.cust_fleet_info";
+		String sql = "Select * from public.cust_fleet_info";
 		return jdbcTemplate.query(sql, new BeanPropertyRowMapper(CustomerFleet.class));
 	}
 
@@ -53,7 +53,7 @@ public class CustomerFleetDaoImpl implements CustomerFleetDao {
 	@Override
 	public List<FleetInfo> getFleets(int customer_id) {
 
-		String sql = "select B.* from mydb.cust_fleet_info A , mydb.fleet_info B where A.fleet_id = B.fleet_id and A.customer_id="
+		String sql = "select B.* from public.cust_fleet_info A , public.fleet_info B where A.fleet_id = B.fleet_id and A.customer_id="
 				+ customer_id;
 
 		return jdbcTemplate.query(sql, new ResultSetExtractor<List>() {
