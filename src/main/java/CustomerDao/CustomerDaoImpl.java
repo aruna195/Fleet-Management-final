@@ -138,7 +138,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	@Override
 	public void deleteCustomer(int customerId) {
 		// TODO Auto-generated method stub
-		String sql = "DELETE From public.customers where customer_id=?";
+		String sql = "DELETE From public.customer where customer_id=?";
 		jdbcTemplate.update(sql, customerId);
 	}
 
